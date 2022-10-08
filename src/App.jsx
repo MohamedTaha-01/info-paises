@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link } from 'react-router-dom';
-import Countries from "./components/Countries";
-import Country from "./components/Country";
-import Home from "./components/Home";
+import Countries from "./pages/Countries";
+import Country from "./pages/Country";
+import Home from "./pages/Home";
 import Nav from "./components/Nav";
 
 function App() {

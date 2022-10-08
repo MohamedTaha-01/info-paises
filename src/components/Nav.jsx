@@ -6,10 +6,10 @@ export default function Nav(){
         <nav>
             <ul>
                 <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Inicio</Link>
                 </li>
                 <li>
-                    <Link to="/countries">Countries</Link>
+                    <Link to="/countries">Países</Link>
                 </li>
             </ul>
         </nav>

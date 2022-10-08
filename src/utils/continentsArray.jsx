@@ -1,0 +1,1 @@
+export const continentsArray = ['África', 'América', 'Asia', 'Europa', 'Oceanía', 'Antártida'];
