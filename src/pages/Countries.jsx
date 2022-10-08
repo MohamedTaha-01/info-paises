@@ -11,12 +11,8 @@ export default function Countries() {
   const [data, setData] = useState();
   // filters
   const [urlParams, setUrlParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(1);
   const [searchValue, setSearch] = useState("");
-  const [continentsChecked, setContinentsChecked] = useState(
-    new Array(continentsArray.length).fill(false)
-  );
-  const [filters, setFilters] = useState();
+  const [continentsChecked, setContinentsChecked] = useState(continentsArray);
 
   const [filteredData, setFilteredData] = useState();
 
@@ -28,10 +24,10 @@ export default function Countries() {
       const res = await axios.get(
         "https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags"
       );
+      setDataLoading(false);
       setData(res.data);
     };
     fetchData();
-    setDataLoading(false);
   }, []);
 
   useEffect(() => {
@@ -49,13 +45,16 @@ export default function Countries() {
 
   const handleContinentCheck = (i) => {
     setContinentsChecked(
-      continentsChecked.map((boolean, index) => {
-        return index === i ? !boolean : boolean;
+      continentsChecked.map((continent, index) => {
+        const boolean = index === i ? !continent.checked : continent.checked;
+        return {
+          name: continent.name,
+          name_en: continent.name_en,
+          checked: boolean,
+        };
       })
     );
   };
-
-  console.log(continentsChecked);
 
   return (
     <div>
@@ -77,12 +76,14 @@ export default function Countries() {
                 <input
                   type="checkbox"
                   name=""
-                  id={`checkbox-continent-${i}`}
-                  value={continent}
+                  id={`checkbox-continent-${continent.name}`}
+                  value={continent.name}
                   onChange={() => handleContinentCheck(i)}
-                  checked={continentsChecked[i]}
+                  checked={continentsChecked[i].checked}
                 />
-                <label htmlFor={`checkbox-continent-${i}`}>{continent}</label>
+                <label htmlFor={`checkbox-continent-${continent.name}`}>
+                  {continent.name}
+                </label>
               </div>
             ))}
           </div>
@@ -93,23 +94,13 @@ export default function Countries() {
         {dataLoading ? (
           <p>Cargando datos...</p>
         ) : (
-          <CountryList data={data} searchValue={searchValue} />
+          <CountryList
+            data={data}
+            searchValue={searchValue}
+            continentsChecked={continentsChecked}
+          />
         )}
       </div>
-      <button
-        onClick={() => {
-          setUrlParams(...urlParams, { page: 1 });
-        }}
-      >
-        1
-      </button>
-      <button
-        onClick={() => {
-          setUrlParams(...urlParams, { page: 2 });
-        }}
-      >
-        2
-      </button>
     </div>
   );
 }
