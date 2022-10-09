@@ -10,6 +10,7 @@ export default function CountryList({
   onlyTerritories,
 }) {
   const [currentPage, setCurrentPage] = useState(0);
+  const [pageSize, setPageSize] = useState(10);
 
   useEffect(() => {
     setCurrentPage(0);
@@ -59,7 +60,6 @@ export default function CountryList({
     });
   }
 
-  const pageSize = 10;
   let slicedData = [];
   for (let i = 0; i < data.length; i += pageSize) {
     const dataChunk = data.slice(i, i + pageSize);
@@ -83,24 +83,57 @@ export default function CountryList({
   }
 
   return (
-    <div>
-      {data &&
-        slicedData.map((dataChunk, sliceIndex) => (
-          <CountryListButton
-            key={`buttonPage${sliceIndex}`}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            value={sliceIndex}
-          />
-        ))}
-
+    <>
+      <div>
+        <div>Número de entradas por página</div>
+        <div>
+          <button
+            onClick={() => {
+              setPageSize(10);
+            }}
+            disabled={pageSize === 10 ? true : false}
+          >
+            10
+          </button>
+          <button
+            onClick={() => {
+              setPageSize(25);
+            }}
+            disabled={pageSize === 25 ? true : false}
+          >
+            25
+          </button>
+          <button
+            onClick={() => {
+              setPageSize(50);
+            }}
+            disabled={pageSize === 50 ? true : false}
+          >
+            50
+          </button>
+          <p>{`Mostrando ${pageSize} resultados por página`}</p>
+        </div>
+      </div>
+      <div>
+        {data &&
+          slicedData.map((dataChunk, sliceIndex) => (
+            <CountryListButton
+              key={`buttonPage${sliceIndex}`}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              value={sliceIndex}
+            />
+          ))}
+      </div>
       {data &&
         slicedData.map((dataChunk, sliceIndex) =>
           sliceIndex === currentPage ? (
             <div key={`CountryListPage${sliceIndex}`}>
-              <div>{`Mostrando resultados del ${calcItemsFrom()} al ${calcItemsTo()} de un total de ${
-                data.length
-              } resultados`}</div>
+              <div>
+                <p>{`Resultados del ${calcItemsFrom()} al ${calcItemsTo()} de un total de ${
+                  data.length
+                } resultados`}</p>
+              </div>
               <div>
                 <CountryListPage dataChunk={dataChunk} />
               </div>
@@ -109,6 +142,6 @@ export default function CountryList({
             ""
           )
         )}
-    </div>
+    </>
   );
 }
