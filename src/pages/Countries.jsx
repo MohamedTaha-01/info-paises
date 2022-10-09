@@ -13,6 +13,7 @@ export default function Countries() {
   const [urlParams, setUrlParams] = useSearchParams();
   const [searchValue, setSearch] = useState("");
   const [continentsChecked, setContinentsChecked] = useState(continentsArray);
+  const [onlyCountries, setOnlyCountries] = useState(false);
 
   const [filteredData, setFilteredData] = useState();
 
@@ -22,7 +23,7 @@ export default function Countries() {
     setDataLoading(true);
     const fetchData = async () => {
       const res = await axios.get(
-        "https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags"
+        "https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags,independent"
       );
       setDataLoading(false);
       setData(res.data);
@@ -87,7 +88,20 @@ export default function Countries() {
               </div>
             ))}
           </div>
-          <div></div>
+          <div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="checkbox-only_countries"
+                checked={onlyCountries}
+                onChange={() => {
+                  setOnlyCountries(!onlyCountries);
+                }}
+              />
+              <label htmlFor="checkbox-only_countries">Solo países</label>
+            </div>
+          </div>
         </form>
       </div>
       <div>
@@ -98,6 +112,7 @@ export default function Countries() {
             data={data}
             searchValue={searchValue}
             continentsChecked={continentsChecked}
+            onlyCountries={onlyCountries}
           />
         )}
       </div>

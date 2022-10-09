@@ -1,14 +1,15 @@
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
     <div>
       Home
       <div>
-        <h3>Todos los países</h3>
+        <h3>Países y territorios</h3>
       </div>
       <div>
         <Link to="/countries">
+          <p>Todos los países y territorios</p>
           <p>Todos los países</p>
         </Link>
       </div>

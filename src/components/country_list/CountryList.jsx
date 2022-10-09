@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
 import CountryItem from "./CountryItem";
 
-export default function CountryList({ data, searchValue, continentsChecked }) {
+export default function CountryList({
+  data,
+  searchValue,
+  continentsChecked,
+  onlyCountries,
+}) {
   if (data === undefined) return false;
   // let filtro = data.filter((country) => {
   //   return country.capital.length > 0;
@@ -33,6 +38,13 @@ export default function CountryList({ data, searchValue, continentsChecked }) {
       return country.continents.includes(continent);
     });
   });
+
+  if (onlyCountries) {
+    data = data.filter((country) => {
+      return country.independent === true;
+    });
+  }
+  console.log(data);
 
   return (
     <div>
