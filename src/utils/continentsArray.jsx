@@ -5,5 +5,5 @@ export const continentsArray = [
   { name: "Asia", name_en: "Asia", checked: false },
   { name: "Europa", name_en: "Europe", checked: false },
   { name: "Oceanía", name_en: "Oceania", checked: false },
-  { name: "Antártida", name_en: "Antartica", checked: false },
+  { name: "Antártida", name_en: "Antarctica", checked: false },
 ];

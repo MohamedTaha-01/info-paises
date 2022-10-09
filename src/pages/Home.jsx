@@ -9,8 +9,9 @@ export default function Home() {
       </div>
       <div>
         <Link to="/countries">
-          <p>Todos los países y territorios</p>
-          <p>Todos los países</p>
+          <p>Territorios independientes (países) y no independientes</p>
+          <p>Territorios independientes (países)</p>
+          <p>Territorios no independientes</p>
         </Link>
       </div>
       <div>

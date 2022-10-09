@@ -14,6 +14,7 @@ export default function Countries() {
   const [searchValue, setSearch] = useState("");
   const [continentsChecked, setContinentsChecked] = useState(continentsArray);
   const [onlyCountries, setOnlyCountries] = useState(false);
+  const [onlyTerritories, setOnlyTerritories] = useState(false);
 
   const [filteredData, setFilteredData] = useState();
 
@@ -99,7 +100,23 @@ export default function Countries() {
                   setOnlyCountries(!onlyCountries);
                 }}
               />
-              <label htmlFor="checkbox-only_countries">Solo países</label>
+              <label htmlFor="checkbox-only_countries">
+                Solo territorios independientes (países)
+              </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="checkbox-only_territories"
+                checked={onlyTerritories}
+                onChange={() => {
+                  setOnlyTerritories(!onlyTerritories);
+                }}
+              />
+              <label htmlFor="checkbox-only_territories">
+                Solo territorios no independientes
+              </label>
             </div>
           </div>
         </form>
@@ -113,6 +130,7 @@ export default function Countries() {
             searchValue={searchValue}
             continentsChecked={continentsChecked}
             onlyCountries={onlyCountries}
+            onlyTerritories={onlyTerritories}
           />
         )}
       </div>

@@ -6,6 +6,7 @@ export default function CountryList({
   searchValue,
   continentsChecked,
   onlyCountries,
+  onlyTerritories,
 }) {
   if (data === undefined) return false;
   // let filtro = data.filter((country) => {
@@ -44,10 +45,17 @@ export default function CountryList({
       return country.independent === true;
     });
   }
+
+  if (onlyTerritories) {
+    data = data.filter((country) => {
+      return country.independent === false;
+    });
+  }
   console.log(data);
 
   return (
     <div>
+      <div>{`${data.length} resultados encontrados`}</div>
       {data &&
         data.map((country, i) => (
           <Link to={`/countries/${country.name.common}`} key={i}>
