@@ -1,5 +1,6 @@
-import { Link } from "react-router-dom";
-import CountryItem from "./CountryItem";
+import { useEffect, useState } from "react";
+import CountryListButton from "./CountryListButton";
+import CountryListPage from "./CountryListPage";
 
 export default function CountryList({
   data,
@@ -8,6 +9,12 @@ export default function CountryList({
   onlyCountries,
   onlyTerritories,
 }) {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [data, searchValue, continentsChecked, onlyCountries, onlyTerritories]);
+
   if (data === undefined) return false;
   // let filtro = data.filter((country) => {
   //   return country.capital.length > 0;
@@ -51,17 +58,57 @@ export default function CountryList({
       return country.independent === false;
     });
   }
-  console.log(data);
+
+  const pageSize = 10;
+  let slicedData = [];
+  for (let i = 0; i < data.length; i += pageSize) {
+    const dataChunk = data.slice(i, i + pageSize);
+    slicedData.push(dataChunk);
+  }
+
+  function calcItemsFrom() {
+    let aux = 0;
+    for (let j = 0; j < currentPage; j++) {
+      aux = slicedData[j].length + aux;
+    }
+    return aux + 1;
+  }
+
+  function calcItemsTo() {
+    let aux = 0;
+    for (let j = 0; j < currentPage; j++) {
+      aux = slicedData[j].length + aux;
+    }
+    return aux + slicedData[currentPage].length;
+  }
 
   return (
     <div>
-      <div>{`${data.length} resultados encontrados`}</div>
       {data &&
-        data.map((country, i) => (
-          <Link to={`/countries/${country.name.common}`} key={i}>
-            <CountryItem country={country} />
-          </Link>
+        slicedData.map((dataChunk, sliceIndex) => (
+          <CountryListButton
+            key={`buttonPage${sliceIndex}`}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            value={sliceIndex}
+          />
         ))}
+
+      {data &&
+        slicedData.map((dataChunk, sliceIndex) =>
+          sliceIndex === currentPage ? (
+            <div key={`CountryListPage${sliceIndex}`}>
+              <div>{`Mostrando resultados del ${calcItemsFrom()} al ${calcItemsTo()} de un total de ${
+                data.length
+              } resultados`}</div>
+              <div>
+                <CountryListPage dataChunk={dataChunk} />
+              </div>
+            </div>
+          ) : (
+            ""
+          )
+        )}
     </div>
   );
 }
