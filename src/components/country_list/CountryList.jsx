@@ -18,54 +18,8 @@ export default function CountryList({
   }, [data, searchValue, continentsChecked, onlyCountries, onlyTerritories]);
 
   if (data === undefined) return false;
-  // let filtro = data.filter((country) => {
-  //   return country.capital.length > 0;
-  // });
-  // console.log(
-  //   filtro.filter((country) => {
-  //     return country.capital[0].toLowerCase().includes(searchValue.toLowerCase());
-  //   })
-
-  if (searchValue !== "") {
-    data = data.filter((country) => {
-      return (
-        country.name.common.toLowerCase().includes(searchValue.toLowerCase()) ||
-        country.capital.includes(searchValue.toLowerCase())
-      );
-    });
-  }
-
-  const selectedContinents = continentsChecked
-    .filter((o) => {
-      return o.checked ? o.name : "";
-    })
-    .map((o) => {
-      return o.name_en;
-    });
-
-  selectedContinents.forEach((continent) => {
-    data = data.filter((country) => {
-      return country.continents.includes(continent);
-    });
-  });
-
-  if (onlyCountries) {
-    data = data.filter((country) => {
-      return country.independent === true;
-    });
-  }
-
-  if (onlyTerritories) {
-    data = data.filter((country) => {
-      return country.independent === false;
-    });
-  }
-
-  let slicedData = [];
-  for (let i = 0; i < data.length; i += pageSize) {
-    const dataChunk = data.slice(i, i + pageSize);
-    slicedData.push(dataChunk);
-  }
+  let filteredData,
+    filteredDataAux = [];
 
   switch (sorting) {
     case "by_nameAsc":
@@ -90,6 +44,69 @@ export default function CountryList({
       break;
     default:
       break;
+  }
+
+  filteredData = searchValue
+    ? data.filter((country) => {
+        return country.name.common
+          .toLowerCase()
+          .includes(searchValue.toLowerCase());
+      })
+    : data;
+
+  let capitalsFilter = data.filter((country) => {
+    return country.capital.length > 0;
+  });
+  filteredDataAux = searchValue
+    ? capitalsFilter.filter((country) => {
+        return country.capital[0]
+          .toLowerCase()
+          .includes(searchValue.toLowerCase());
+      })
+    : [];
+
+  let activeCountries = new Set(
+    filteredData.map((continent) => {
+      return continent.name.common;
+    })
+  );
+  filteredData = [
+    ...filteredData,
+    ...filteredDataAux.filter((country) => {
+      return !activeCountries.has(country.name.common);
+    }),
+  ];
+
+  const selectedContinents = continentsChecked
+    .filter((continent) => {
+      return continent.checked ? continent.name : "";
+    })
+    .map((continent) => {
+      return continent.name_en;
+    });
+
+  selectedContinents.forEach((continent) => {
+    filteredData = filteredData.filter((country) => {
+      return country.continents.includes(continent);
+    });
+  });
+
+  if (onlyCountries) {
+    filteredData = filteredData.filter((country) => {
+      return country.independent === true;
+    });
+  }
+
+  if (onlyTerritories) {
+    filteredData = filteredData.filter((country) => {
+      return country.independent === false;
+    });
+  }
+
+  let slicedData = [];
+  for (let i = 0; i < filteredData.length; i += pageSize) {
+    const dataChunk = filteredData.slice(i, i + pageSize);
+    slicedData.push(dataChunk);
   }
 
   function calcItemsFrom() {
@@ -175,7 +192,7 @@ export default function CountryList({
             <div key={`CountryListPage${sliceIndex}`}>
               <div>
                 <p>{`Resultados del ${calcItemsFrom()} al ${calcItemsTo()} de un total de ${
-                  data.length
+                  filteredData.length
                 } resultados`}</p>
               </div>
               <div>
