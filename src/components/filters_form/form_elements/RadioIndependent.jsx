@@ -1,0 +1,22 @@
+export default function RadioIndependent({
+  option,
+  value,
+  radioIndependentState,
+  dispatchRadioIndependent,
+  actionType,
+}) {
+  return (
+    <>
+      <input
+        type="radio"
+        name="radio-independent"
+        id={`radio-independent-${option}`}
+        checked={radioIndependentState}
+        onChange={() => {
+          dispatchRadioIndependent(actionType);
+        }}
+      />
+      <label htmlFor={`radio-independent-${option}`}>{value}</label>
+    </>
+  );
+}

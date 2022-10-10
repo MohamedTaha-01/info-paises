@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useReducer } from "react";
 import { useSearchParams } from "react-router-dom";
 import CountryList from "../components/country_list/CountryList";
+import FiltersForm from "../components/filters_form/FiltersForm";
 import { continentsArray } from "../utils/continentsArray";
 
 const axios = require("axios").default;
@@ -13,10 +14,38 @@ export default function Countries() {
   const [urlParams, setUrlParams] = useSearchParams();
   const [searchValue, setSearch] = useState("");
   const [continentsChecked, setContinentsChecked] = useState(continentsArray);
-  const [onlyCountries, setOnlyCountries] = useState(false);
-  const [onlyTerritories, setOnlyTerritories] = useState(false);
 
-  const searchInput = useRef();
+  const radioIndependentReducer = (state, action) => {
+    switch (action.type) {
+      default:
+      case "INDEPENDENT_CHOOSE_ALL":
+        return {
+          option_all: true,
+          option_true: false,
+          option_false: false,
+        };
+      case "INDEPENDENT_CHOOSE_TRUE":
+        return {
+          option_all: false,
+          option_true: true,
+          option_false: false,
+        };
+      case "INDEPENDENT_CHOOSE_FALSE":
+        return {
+          option_all: false,
+          option_true: false,
+          option_false: true,
+        };
+    }
+  };
+  const [radioIndependentState, dispatchRadioIndependent] = useReducer(
+    radioIndependentReducer,
+    {
+      option_all: true,
+      option_true: false,
+      option_false: false,
+    }
+  );
 
   useEffect(() => {
     setDataLoading(true);
@@ -30,94 +59,18 @@ export default function Countries() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    urlParams.forEach((urlParam, key) => {
-      // if (key === 'search') searchInput.current.value = urlParam;
-    });
-    // get search param desde la url y meterlo en input
-  }, [urlParams]);
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-    // setUrlParams({'search': e.target.value});
-    // if(e.target.value==='') setUrlParams();
-  };
-
-  const handleContinentCheck = (i) => {
-    setContinentsChecked(
-      continentsChecked.map((continent, index) => {
-        const boolean = index === i ? !continent.checked : continent.checked;
-        return {
-          name: continent.name,
-          name_en: continent.name_en,
-          checked: boolean,
-        };
-      })
-    );
-  };
-
   return (
     <div>
       Countries
       <div>
-        <form action="">
-          <fieldset>
-            <input
-              type="text"
-              placeholder="Buscar país o capital"
-              value={searchValue}
-              onChange={handleSearch}
-              ref={searchInput}
-            />
-          </fieldset>
-          <fieldset>
-            {continentsArray.map((continent, i) => (
-              <div key={`continent${i}`}>
-                <input
-                  type="checkbox"
-                  name=""
-                  id={`checkbox-continent-${continent.name}`}
-                  value={continent.name}
-                  onChange={() => handleContinentCheck(i)}
-                  checked={continentsChecked[i].checked}
-                />
-                <label htmlFor={`checkbox-continent-${continent.name}`}>
-                  {continent.name}
-                </label>
-              </div>
-            ))}
-          </fieldset>
-          <fieldset>
-            <div>
-              <input
-                type="checkbox"
-                name=""
-                id="checkbox-only_countries"
-                checked={onlyCountries}
-                onChange={() => {
-                  setOnlyCountries(!onlyCountries);
-                }}
-              />
-              <label htmlFor="checkbox-only_countries">
-                Solo territorios independientes (países)
-              </label>
-            </div>
-            <div>
-              <input
-                type="checkbox"
-                name=""
-                id="checkbox-only_territories"
-                checked={onlyTerritories}
-                onChange={() => {
-                  setOnlyTerritories(!onlyTerritories);
-                }}
-              />
-              <label htmlFor="checkbox-only_territories">
-                Solo territorios no independientes
-              </label>
-            </div>
-          </fieldset>
-        </form>
+        <FiltersForm
+          searchValue={searchValue}
+          setSearch={setSearch}
+          continentsChecked={continentsChecked}
+          setContinentsChecked={setContinentsChecked}
+          radioIndependentState={radioIndependentState}
+          dispatchRadioIndependent={dispatchRadioIndependent}
+        />
       </div>
       <div>
         {dataLoading ? (
@@ -127,8 +80,7 @@ export default function Countries() {
             data={data}
             searchValue={searchValue}
             continentsChecked={continentsChecked}
-            onlyCountries={onlyCountries}
-            onlyTerritories={onlyTerritories}
+            radioIndependentState={radioIndependentState}
           />
         )}
       </div>

@@ -10,8 +10,7 @@ export default function CountryList({
   data,
   searchValue,
   continentsChecked,
-  onlyCountries,
-  onlyTerritories,
+  radioIndependentState,
 }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
@@ -19,14 +18,7 @@ export default function CountryList({
 
   useEffect(() => {
     setCurrentPage(0);
-  }, [
-    data,
-    searchValue,
-    continentsChecked,
-    onlyCountries,
-    onlyTerritories,
-    pageSize,
-  ]);
+  }, [data, searchValue, continentsChecked, radioIndependentState, pageSize]);
 
   if (data === undefined) return false;
   let filteredData,
@@ -102,17 +94,17 @@ export default function CountryList({
     });
   });
 
-  if (onlyCountries) {
-    filteredData = filteredData.filter((country) => {
-      return country.independent === true;
-    });
-  }
+  filteredData = radioIndependentState.option_true
+    ? filteredData.filter((country) => {
+        return country.independent === true;
+      })
+    : filteredData;
 
-  if (onlyTerritories) {
-    filteredData = filteredData.filter((country) => {
-      return country.independent === false;
-    });
-  }
+  filteredData = radioIndependentState.option_false
+    ? filteredData.filter((country) => {
+        return country.independent === false;
+      })
+    : filteredData;
 
   let slicedData = [];
   for (let i = 0; i < filteredData.length; i += pageSize) {
