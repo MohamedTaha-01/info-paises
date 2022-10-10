@@ -1,6 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import CountryListButton from "./CountryListButton";
 import CountryListPage from "./CountryListPage";
+import {
+  calcItemsFrom_Number,
+  calcItemsTo_Number,
+} from "../../utils/calcItemsNumber";
 
 export default function CountryList({
   data,
@@ -15,7 +19,14 @@ export default function CountryList({
 
   useEffect(() => {
     setCurrentPage(0);
-  }, [data, searchValue, continentsChecked, onlyCountries, onlyTerritories]);
+  }, [
+    data,
+    searchValue,
+    continentsChecked,
+    onlyCountries,
+    onlyTerritories,
+    pageSize,
+  ]);
 
   if (data === undefined) return false;
   let filteredData,
@@ -109,22 +120,6 @@ export default function CountryList({
     slicedData.push(dataChunk);
   }
 
-  function calcItemsFrom() {
-    let aux = 0;
-    for (let j = 0; j < currentPage; j++) {
-      aux = slicedData[j].length + aux;
-    }
-    return aux + 1;
-  }
-
-  function calcItemsTo() {
-    let aux = 0;
-    for (let j = 0; j < currentPage; j++) {
-      aux = slicedData[j].length + aux;
-    }
-    return aux + slicedData[currentPage].length;
-  }
-
   return (
     <>
       <div>
@@ -191,9 +186,13 @@ export default function CountryList({
           sliceIndex === currentPage ? (
             <div key={`CountryListPage${sliceIndex}`}>
               <div>
-                <p>{`Resultados del ${calcItemsFrom()} al ${calcItemsTo()} de un total de ${
-                  filteredData.length
-                } resultados`}</p>
+                <p>{`Resultados del ${calcItemsFrom_Number(
+                  slicedData,
+                  currentPage
+                )} al ${calcItemsTo_Number(
+                  slicedData,
+                  currentPage
+                )} de un total de ${filteredData.length} resultados`}</p>
               </div>
               <div>
                 <CountryListPage dataChunk={dataChunk} />
