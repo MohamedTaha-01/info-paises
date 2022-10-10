@@ -11,6 +11,7 @@ export default function CountryList({
 }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
+  const [sorting, setSorting] = useState("");
 
   useEffect(() => {
     setCurrentPage(0);
@@ -66,6 +67,31 @@ export default function CountryList({
     slicedData.push(dataChunk);
   }
 
+  switch (sorting) {
+    case "by_nameAsc":
+      data.sort((a, b) => (a.name.common > b.name.common ? 1 : -1));
+      break;
+    case "by_nameDesc":
+      data.sort((a, b) => (a.name.common > b.name.common ? -1 : 1));
+      break;
+    case "by_capitalAsc":
+      data.sort((a, b) => (a.capital > b.capital ? 1 : -1));
+      break;
+    case "by_capitalDesc":
+      data.sort((a, b) => (a.capital > b.capital ? -1 : 1));
+      break;
+    case "by_populationAsc":
+      data.sort((a, b) => (a.population > b.population ? 1 : -1));
+      break;
+    case "by_populationDesc":
+      data.sort((a, b) => (a.population > b.population ? -1 : 1));
+      break;
+    case "none":
+      break;
+    default:
+      break;
+  }
+
   function calcItemsFrom() {
     let aux = 0;
     for (let j = 0; j < currentPage; j++) {
@@ -84,6 +110,24 @@ export default function CountryList({
 
   return (
     <>
+      <div>
+        <label htmlFor="select-order_by">Ordenar por: </label>
+        <select
+          name=""
+          id="select-order_by"
+          onChange={(e) => {
+            setSorting(e.target.value);
+          }}
+        >
+          <option value="none">Por defecto</option>
+          <option value="by_nameAsc">Nombre (Asc)</option>
+          <option value="by_nameDesc">Nombre (Desc)</option>
+          <option value="by_capitalAsc">Capital (Asc)</option>
+          <option value="by_capitalDesc">Capital (Desc)</option>
+          <option value="by_populationAsc">Población (Asc)</option>
+          <option value="by_populationDesc">Población (Desc)</option>
+        </select>
+      </div>
       <div>
         <div>Número de entradas por página</div>
         <div>

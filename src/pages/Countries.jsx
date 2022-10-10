@@ -16,8 +16,6 @@ export default function Countries() {
   const [onlyCountries, setOnlyCountries] = useState(false);
   const [onlyTerritories, setOnlyTerritories] = useState(false);
 
-  const [filteredData, setFilteredData] = useState();
-
   const searchInput = useRef();
 
   useEffect(() => {
@@ -63,7 +61,7 @@ export default function Countries() {
       Countries
       <div>
         <form action="">
-          <div>
+          <fieldset>
             <input
               type="text"
               placeholder="Buscar país o capital"
@@ -71,8 +69,8 @@ export default function Countries() {
               onChange={handleSearch}
               ref={searchInput}
             />
-          </div>
-          <div>
+          </fieldset>
+          <fieldset>
             {continentsArray.map((continent, i) => (
               <div key={`continent${i}`}>
                 <input
@@ -88,8 +86,8 @@ export default function Countries() {
                 </label>
               </div>
             ))}
-          </div>
-          <div>
+          </fieldset>
+          <fieldset>
             <div>
               <input
                 type="checkbox"
@@ -118,7 +116,7 @@ export default function Countries() {
                 Solo territorios no independientes
               </label>
             </div>
-          </div>
+          </fieldset>
         </form>
       </div>
       <div>
