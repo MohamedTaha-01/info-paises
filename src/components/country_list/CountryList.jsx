@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 import CountryListButton from "./CountryListButton";
 import CountryListPage from "./CountryListPage";
 import {
@@ -80,6 +80,7 @@ export default function CountryList({
     }),
   ];
 
+  // filter by continent
   const selectedContinents = continentsChecked
     .filter((continent) => {
       return continent.checked ? continent.name : "";
@@ -88,12 +89,11 @@ export default function CountryList({
       return continent.name_en;
     });
 
-  selectedContinents.forEach((continent) => {
-    filteredData = filteredData.filter((country) => {
-      return country.continents.includes(continent);
-    });
+  filteredData = filteredData.filter((country) => {
+    return selectedContinents.includes(...country.continents);
   });
 
+  // filter by independent
   filteredData = radioIndependentState.option_true
     ? filteredData.filter((country) => {
         return country.independent === true;
