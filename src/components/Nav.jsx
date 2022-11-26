@@ -1,14 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Nav() {
   return (
     <nav>
+      <h1>
+        <Link to="/">Info países</Link>
+      </h1>
       <ul>
         <li>
-          <Link to="/">Inicio</Link>
+          <NavLink end to="/">
+            <h3>Inicio</h3>
+          </NavLink>
         </li>
         <li>
-          <Link to="/countries">Países y territorios</Link>
+          <NavLink to="/countries">
+            <h3>Países y territorios</h3>
+          </NavLink>
         </li>
       </ul>
     </nav>
