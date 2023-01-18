@@ -9,8 +9,6 @@ import { useMediaQuery } from "react-responsive";
 export const ScreenSizeContext = createContext(false);
 
 function App() {
-  // useMediaQuery({ maxWidth: 720 });
-
   return (
     <div className="App">
       <ScreenSizeContext.Provider value={useMediaQuery({ maxWidth: 720 })}>
