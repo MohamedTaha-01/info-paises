@@ -14,7 +14,7 @@ export default function CountryListWrapper({
 }) {
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
-  const [sorting, setSorting] = useState("");
+  const [sorting, setSorting] = useState("by_nameAsc");
 
   useEffect(() => {
     setCurrentPage(0);
@@ -43,9 +43,8 @@ export default function CountryListWrapper({
     case "by_populationDesc":
       data.sort((a, b) => (a.population > b.population ? -1 : 1));
       break;
-    case "none":
-      break;
     default:
+      data.sort((a, b) => (a.name.common > b.name.common ? 1 : -1));
       break;
   }
 
@@ -124,13 +123,12 @@ export default function CountryListWrapper({
               setSorting(e.target.value);
             }}
           >
-            <option value="none">Por defecto</option>
-            <option value="by_nameAsc">Nombre (Asc)</option>
-            <option value="by_nameDesc">Nombre (Desc)</option>
-            <option value="by_capitalAsc">Capital (Asc)</option>
-            <option value="by_capitalDesc">Capital (Desc)</option>
-            <option value="by_populationAsc">Población (Asc)</option>
-            <option value="by_populationDesc">Población (Desc)</option>
+            <option value="by_nameAsc">&nbsp;Nombre (Asc)</option>
+            <option value="by_nameDesc">&nbsp;Nombre (Desc)</option>
+            <option value="by_capitalAsc">&nbsp;Capital (Asc)</option>
+            <option value="by_capitalDesc">&nbsp;Capital (Desc)</option>
+            <option value="by_populationAsc">&nbsp;Población (Asc)</option>
+            <option value="by_populationDesc">&nbsp;Población (Desc)</option>
           </select>
         </fieldset>
         <fieldset className="page_options-number pb-20">
