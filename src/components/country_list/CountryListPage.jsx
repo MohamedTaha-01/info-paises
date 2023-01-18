@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import CountryItem from "./country_item/CountryItem";
 import { useContext } from "react";
 import { ScreenSizeContext } from "../../App";
@@ -10,7 +9,7 @@ export default function CountryListPage({ dataChunk }) {
   return (
     <>
       {/* ---------- HEADER ---------- */}
-      <div className="item grid-header">
+      <div className="country-item grid-header">
         <div className="item-name">País</div>
         {!isSmallScreen && (
           <>
