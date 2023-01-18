@@ -51,7 +51,7 @@ export default function Countries() {
     setDataLoading(true);
     const fetchData = async () => {
       const res = await axios.get(
-        "https://restcountries.com/v3.1/all?fields=name,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags,independent"
+        "https://restcountries.com/v3.1/all?fields=name,cca2,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags,independent"
       );
       setDataLoading(false);
       setData(res.data);
@@ -60,9 +60,32 @@ export default function Countries() {
   }, []);
 
   return (
-    <div>
-      Countries
-      <div>
+    <div className="page-wrapper">
+      <div className="info-wrapper">
+        <ul>
+          <li>
+            A continuación encontrarás una lista de todos los territorios del
+            mundo.
+          </li>
+          <br />
+          <li>
+            Haciendo click en un territorio podrás ver información sobre el.
+          </li>
+          <br />
+          <li>Utiliza los filtros para encontrar el territorio que deseas.</li>
+          <br />
+          <li>
+            No todos los territorios se consideran países, algunos son
+            territorios independientes.
+          </li>
+          <br />
+          <li>
+            También puedes ordenar los territorios o cambiar el número de
+            territorios que se muestran por página
+          </li>
+        </ul>
+      </div>
+      <div className="filter-wrapper">
         <FiltersForm
           searchValue={searchValue}
           setSearch={setSearch}
@@ -72,7 +95,7 @@ export default function Countries() {
           dispatchRadioIndependent={dispatchRadioIndependent}
         />
       </div>
-      <div>
+      <div className="country_list-wrapper">
         {dataLoading ? (
           <p>Cargando datos...</p>
         ) : (

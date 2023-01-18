@@ -114,70 +114,80 @@ export default function CountryList({
 
   return (
     <>
-      <div>
-        <label htmlFor="select-order_by">Ordenar por: </label>
-        <select
-          name=""
-          id="select-order_by"
-          onChange={(e) => {
-            setSorting(e.target.value);
-          }}
-        >
-          <option value="none">Por defecto</option>
-          <option value="by_nameAsc">Nombre (Asc)</option>
-          <option value="by_nameDesc">Nombre (Desc)</option>
-          <option value="by_capitalAsc">Capital (Asc)</option>
-          <option value="by_capitalDesc">Capital (Desc)</option>
-          <option value="by_populationAsc">Población (Asc)</option>
-          <option value="by_populationDesc">Población (Desc)</option>
-        </select>
-      </div>
-      <div>
-        <div>Número de entradas por página</div>
-        <div>
-          <button
-            onClick={() => {
-              setPageSize(10);
+      <div className="page_options-wrapper">
+        <fieldset className="page_options-order_by p-20">
+          <label htmlFor="select-order_by">Ordenar por: </label>
+          <select
+            name=""
+            id="select-order_by"
+            onChange={(e) => {
+              setSorting(e.target.value);
             }}
-            disabled={pageSize === 10 ? true : false}
           >
-            10
-          </button>
-          <button
-            onClick={() => {
-              setPageSize(25);
-            }}
-            disabled={pageSize === 25 ? true : false}
-          >
-            25
-          </button>
-          <button
-            onClick={() => {
-              setPageSize(50);
-            }}
-            disabled={pageSize === 50 ? true : false}
-          >
-            50
-          </button>
-          <p>{`Mostrando ${pageSize} resultados por página`}</p>
-        </div>
-      </div>
-      <div>
-        {data &&
-          slicedData.map((dataChunk, sliceIndex) => (
-            <CountryListButton
-              key={`buttonPage${sliceIndex}`}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              value={sliceIndex}
-            />
-          ))}
+            <option value="none">Por defecto</option>
+            <option value="by_nameAsc">Nombre (Asc)</option>
+            <option value="by_nameDesc">Nombre (Desc)</option>
+            <option value="by_capitalAsc">Capital (Asc)</option>
+            <option value="by_capitalDesc">Capital (Desc)</option>
+            <option value="by_populationAsc">Población (Asc)</option>
+            <option value="by_populationDesc">Población (Desc)</option>
+          </select>
+        </fieldset>
+        <fieldset className="page_options-number pb-20">
+          <div className="page_options-number_items">
+            <p>Número de entradas por página</p>
+            <div>
+              <button
+                className="numbered-button"
+                onClick={() => {
+                  setPageSize(10);
+                }}
+                disabled={pageSize === 10 ? true : false}
+              >
+                10
+              </button>
+              <button
+                className="numbered-button"
+                onClick={() => {
+                  setPageSize(25);
+                }}
+                disabled={pageSize === 25 ? true : false}
+              >
+                25
+              </button>
+              <button
+                className="numbered-button"
+                onClick={() => {
+                  setPageSize(50);
+                }}
+                disabled={pageSize === 50 ? true : false}
+              >
+                50
+              </button>
+              <p>{`Mostrando ${pageSize} resultados por página`}</p>
+            </div>
+          </div>
+          <div className="page_options-number_page">
+            <p>Página</p>
+            <div>
+              {data &&
+                slicedData.map((dataChunk, sliceIndex) => (
+                  <CountryListButton
+                    key={`buttonPage${sliceIndex}`}
+                    currentPage={currentPage}
+                    setCurrentPage={setCurrentPage}
+                    value={sliceIndex}
+                  />
+                ))}
+            </div>
+          </div>
+        </fieldset>
       </div>
       {data &&
         slicedData.map((dataChunk, sliceIndex) =>
           sliceIndex === currentPage ? (
-            <div key={`CountryListPage${sliceIndex}`}>
-              <div>
+            <div key={`CountryListPage${sliceIndex}`} className="page-data">
+              <div className="page-item-number">
                 <p>{`Resultados del ${calcItemsFrom_Number(
                   slicedData,
                   currentPage
@@ -186,7 +196,7 @@ export default function CountryList({
                   currentPage
                 )} de un total de ${filteredData.length} resultados`}</p>
               </div>
-              <div>
+              <div className="page-item-wrapper">
                 <CountryListPage dataChunk={dataChunk} />
               </div>
             </div>

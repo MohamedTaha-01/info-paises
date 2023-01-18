@@ -1,0 +1,246 @@
+@use "_variables" as v;
+
+:root {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+body {
+  background: v.$blue-secondary;
+  color: v.$light;
+  font-family: "Mulish";
+}
+h1 {
+  font-size: 35px;
+}
+h3 {
+  font-size: 21px;
+}
+h1,
+h2,
+h3 {
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+a {
+  text-decoration: none;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+fieldset {
+  border: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/*===============================================================*/
+
+.page-wrapper {
+  width: 100%;
+  max-width: 1920px;
+  margin: auto;
+}
+
+.p-15 {
+  padding: 15px;
+}
+.p-20 {
+  padding: 20px;
+}
+.pb-20 {
+  padding: 0 20px 20px 20px;
+}
+
+/*---------------------------------------------------------------*/
+
+.info-wrapper {
+  width: 70%;
+  margin: 50px auto 60px auto;
+  ul {
+    list-style: none;
+  }
+}
+
+/*---------------------------------------------------------------*/
+
+.page_options-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  select {
+    height: 2rem;
+    font-size: 1rem;
+    border: none;
+    background-color: v.$blue-primary;
+    color: v.$light;
+  }
+  .numbered-button {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    border-radius: 0;
+    border: none;
+    background-color: v.$blue-primary;
+    color: v.$light;
+    &:disabled {
+      background-color: v.$blue-alternative;
+      color: v.$light;
+    }
+    &:hover {
+      background-color: v.$blue-alternative;
+    }
+  }
+  .page_options-number {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+}
+
+.page-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  @media (max-width: 720px) {
+  }
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 0.5fr 0.5fr 1fr;
+  grid-auto-rows: minmax(150px, auto);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "item-name item-capital item-continents item-population item-languages";
+  background-image: linear-gradient(
+    45deg,
+    hsl(211deg 100% 16%) 0%,
+    hsl(212deg 98% 17%) 13%,
+    hsl(213deg 94% 19%) 19%,
+    hsl(214deg 90% 20%) 24%,
+    hsl(215deg 87% 21%) 28%,
+    hsl(216deg 84% 23%) 32%,
+    hsl(217deg 82% 24%) 35%,
+    hsl(217deg 78% 25%) 39%,
+    hsl(218deg 75% 27%) 42%,
+    hsl(219deg 72% 28%) 45%,
+    hsl(220deg 69% 29%) 48%,
+    hsl(221deg 66% 30%) 52%,
+    hsl(222deg 63% 32%) 55%,
+    hsl(223deg 60% 33%) 58%,
+    hsl(223deg 57% 34%) 61%,
+    hsl(224deg 54% 36%) 65%,
+    hsl(225deg 50% 37%) 68%,
+    hsl(226deg 48% 38%) 72%,
+    hsl(227deg 45% 40%) 76%,
+    hsl(227deg 41% 41%) 81%,
+    hsl(229deg 38% 42%) 87%,
+    hsl(229deg 35% 44%) 100%
+  );
+  border: 1px solid v.$light-dark;
+  color: v.$light;
+  text-align: center;
+  font-size: 24px;
+  @media (max-width: 720px) {
+    grid-template-columns: 100%;
+    grid-template-areas: "item-name";
+    grid-auto-rows: minmax(0px, auto);
+  }
+  div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+  }
+  .item-name {
+    grid-area: item-name;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-position: left;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+    @media (max-width: 720px) {
+      height: 150px;
+    }
+  }
+  .item-capital {
+    grid-area: item-capital;
+  }
+  .item-continents {
+    grid-area: item-continents;
+  }
+  .item-population {
+    grid-area: item-population;
+  }
+  .item-languages {
+    grid-area: item-languages;
+  }
+
+  // mobile country data
+  .data-grid-mobile {
+    display: none;
+    height: 0;
+    opacity: 0;
+    transition: all 600ms ease-in-out;
+    font-size: 18px;
+  }
+  .data-grid-mobile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: minmax(1fr, auto);
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+      "item-capital1_Mobile item-capital2_Mobile"
+      "item-continents1_Mobile item-continents2_Mobile"
+      "item-population1_Mobile item-population2_Mobile"
+      "item-languages1_Mobile item-languages2_Mobile";
+  }
+
+  .item-capital1_Mobile {
+    grid-area: item-capital1_Mobile;
+  }
+
+  .item-capital2_Mobile {
+    grid-area: item-capital2_Mobile;
+  }
+
+  .item-continents1_Mobile {
+    grid-area: item-continents1_Mobile;
+  }
+
+  .item-continents2_Mobile {
+    grid-area: item-continents2_Mobile;
+  }
+
+  .item-population1_Mobile {
+    grid-area: item-population1_Mobile;
+  }
+
+  .item-population2_Mobile {
+    grid-area: item-population2_Mobile;
+  }
+
+  .item-languages1_Mobile {
+    grid-area: item-languages1_Mobile;
+  }
+
+  .item-languages2_Mobile {
+    grid-area: item-languages2_Mobile;
+  }
+}

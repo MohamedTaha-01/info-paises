@@ -2,8 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div>
-      Home
+    <div className="page-wrapper">
       <div>
         <h3>Países y territorios</h3>
       </div>
