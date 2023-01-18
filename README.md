@@ -18,13 +18,14 @@ Página que lista todos los territorios del mundo, tanto independientes (denomin
 
 ### Propósito del proyecto
 
--
+Creo este proyecto para profundizar más en react y aprender a usar más hooks. Además, utilizo Sass por primera vez, un preprocesador de estilos, y Axios, para realizar peticiones http a la API.
 
 ## Tecnologías y servicios usados
 
 - React
   - react-router-dom
   - react-responsive
+- Sass
 - Axios
 
 ## Funciones y características
