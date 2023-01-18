@@ -1,7 +1,6 @@
 import CountryItem from "./country_item/CountryItem";
 import { useContext } from "react";
 import { ScreenSizeContext } from "../../App";
-import CountryItemMobile from "./country_item/CountryItemMobile";
 
 export default function CountryListPage({ dataChunk }) {
   const isSmallScreen = useContext(ScreenSizeContext);
@@ -21,13 +20,9 @@ export default function CountryListPage({ dataChunk }) {
         )}
       </div>
       {/* ---------- LIST ENTRIES ---------- */}
-      {dataChunk.map((country, i) =>
-        !isSmallScreen ? (
-          <CountryItem key={`country${i}`} country={country} />
-        ) : (
-          <CountryItemMobile key={`country${i}`} country={country} />
-        )
-      )}
+      {dataChunk.map((country, i) => (
+        <CountryItem key={`country${i}`} country={country} />
+      ))}
     </>
   );
 }

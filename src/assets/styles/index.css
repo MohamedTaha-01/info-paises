@@ -52,6 +52,10 @@ code {
   margin: auto;
 }
 
+.p-5 {
+  padding: 5px;
+}
+
 .p-15 {
   padding: 15px;
 }
@@ -138,16 +142,25 @@ nav ul a:hover, nav ul a.active {
   justify-content: space-between;
 }
 
-.country-item,
-.country-item-mobile {
+.country-item {
+  display: grid;
+  grid-template-columns: 0.8fr 1fr 0.5fr 0.5fr 1fr;
+  grid-auto-rows: minmax(150px, auto);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "item-name item-capital item-continents item-population item-languages";
   background-image: linear-gradient(45deg, hsl(211deg, 100%, 16%) 0%, hsl(212deg, 98%, 17%) 13%, hsl(213deg, 94%, 19%) 19%, hsl(214deg, 90%, 20%) 24%, hsl(215deg, 87%, 21%) 28%, hsl(216deg, 84%, 23%) 32%, hsl(217deg, 82%, 24%) 35%, hsl(217deg, 78%, 25%) 39%, hsl(218deg, 75%, 27%) 42%, hsl(219deg, 72%, 28%) 45%, hsl(220deg, 69%, 29%) 48%, hsl(221deg, 66%, 30%) 52%, hsl(222deg, 63%, 32%) 55%, hsl(223deg, 60%, 33%) 58%, hsl(223deg, 57%, 34%) 61%, hsl(224deg, 54%, 36%) 65%, hsl(225deg, 50%, 37%) 68%, hsl(226deg, 48%, 38%) 72%, hsl(227deg, 45%, 40%) 76%, hsl(227deg, 41%, 41%) 81%, hsl(229deg, 38%, 42%) 87%, hsl(229deg, 35%, 44%) 100%);
   border: 1px solid #171717;
   color: #e3e3e3;
   text-align: center;
   font-size: 24px;
 }
-.country-item .item-name,
-.country-item-mobile .item-name {
+@media (max-width: 720px) {
+  .country-item {
+    display: block;
+  }
+}
+.country-item .item-name {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,19 +172,9 @@ nav ul a:hover, nav ul a.active {
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
 }
 @media (max-width: 720px) {
-  .country-item .item-name,
-.country-item-mobile .item-name {
+  .country-item .item-name {
     height: 150px;
   }
-}
-
-.country-item {
-  display: grid;
-  grid-template-columns: 0.8fr 1fr 0.5fr 0.5fr 1fr;
-  grid-auto-rows: minmax(150px, auto);
-  gap: 0px 0px;
-  grid-auto-flow: row;
-  grid-template-areas: "item-name item-capital item-continents item-population item-languages";
 }
 .country-item div {
   display: flex;
@@ -193,13 +196,6 @@ nav ul a:hover, nav ul a.active {
 }
 .country-item .item-languages {
   grid-area: item-languages;
-}
-
-.country-item-mobile .mobile-accordion {
-  display: none;
-}
-.country-item-mobile .mobile-accordion.active {
-  display: block;
 }
 
 .country-container {

@@ -1,6 +1,10 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ScreenSizeContext } from "../../../App";
 
 export default function CountryItem({ country }) {
+  const isSmallScreen = useContext(ScreenSizeContext);
+
   return (
     <Link to={`/countries/${country.name.common}`}>
       <div className="country-item">
@@ -13,16 +17,20 @@ export default function CountryItem({ country }) {
         >
           {country.name.common}
         </div>
-        <div className="item-capital p-15">{country.capital}</div>
-        <div className="item-continents p-15">
-          {country.continents.map((continent, i) => (
-            <span key={`continent${i}`}>{continent}</span>
-          ))}
-        </div>
-        <div className="item-population p-15">{country.population}</div>
-        <div className="item-languages p-15">
-          {Object.values(country.languages).join(", ")}
-        </div>
+        {!isSmallScreen && (
+          <>
+            <div className="item-capital p-15">{country.capital}</div>
+            <div className="item-continents p-15">
+              {country.continents.map((continent, i) => (
+                <span key={`continent${i}`}>{continent}</span>
+              ))}
+            </div>
+            <div className="item-population p-15">{country.population}</div>
+            <div className="item-languages p-15">
+              {Object.values(country.languages).join(", ")}
+            </div>
+          </>
+        )}
       </div>
     </Link>
   );
