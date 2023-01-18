@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { ScreenSizeContext } from "../../App";
+import { ScreenSizeContext } from "../../../App";
 import CountryItemData from "./CountryItemData";
 import CountryItemDataMobile from "./CountryItemDataMobile";
 
