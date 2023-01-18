@@ -50,15 +50,17 @@ export default function Country() {
                   <div className="b2">{country.population}</div>
                   <div className="c1">Idiomas</div>
                   <div className="c2">
-                    {Object.values(country.languages).join(", ")}
+                    {country.languages &&
+                      Object.values(country.languages).join(", ")}
                   </div>
                   <div className="d1">Monedas</div>
                   <div className="d2">
-                    {Object.values(country.currencies).map((currency, i) => (
-                      <span key={`currency${i}`}>
-                        {i === 0 ? `${currency.name}` : `, ${currency.name}`}
-                      </span>
-                    ))}
+                    {country.currencies &&
+                      Object.values(country.currencies).map((currency, i) => (
+                        <span key={`currency${i}`}>
+                          {i === 0 ? `${currency.name}` : `, ${currency.name}`}
+                        </span>
+                      ))}
                   </div>
                   <div className="e1">Area</div>
                   <div className="e2">{country.area} km2</div>
