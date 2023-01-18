@@ -215,6 +215,7 @@ nav ul a:hover, nav ul a.active {
   flex-wrap: wrap;
   justify-content: center;
   align-items: baseline;
+  text-align: center;
 }
 .country-container hr {
   width: 50%;
@@ -266,7 +267,7 @@ nav ul a:hover, nav ul a.active {
 .country-container .section-2 .section-half .data-table {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas: "a1 a2" "b1 b2" "c1 c2" "d1 d2" "e1 e2" "f1 f2";

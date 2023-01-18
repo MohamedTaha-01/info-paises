@@ -66,9 +66,11 @@ export default function Country() {
                   <div className="f2">{country.car.side}</div>
                 </div>
               </div>
-              <div className="section-half">
-                <img src={country.coatOfArms.svg} alt="" />
-              </div>
+              {country.coatOfArms.svg && (
+                <div className="section-half">
+                  <img src={country.coatOfArms.svg} alt="" />
+                </div>
+              )}
             </div>
           </div>
         ))

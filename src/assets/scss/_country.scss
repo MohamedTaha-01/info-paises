@@ -17,6 +17,7 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: baseline;
+    text-align: center;
   }
 
   hr {
@@ -96,7 +97,7 @@
       .data-table {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
         gap: 0px 0px;
         grid-auto-flow: row;
         grid-template-areas:
