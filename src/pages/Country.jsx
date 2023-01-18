@@ -39,31 +39,31 @@ export default function Country() {
             </div>
             <div className="section-2">
               <div className="section-half">
-                <div class="data-table">
-                  <div class="a1">Continentes</div>
-                  <div class="a2">
+                <div className="data-table">
+                  <div className="a1">Continentes</div>
+                  <div className="a2">
                     {country.continents.map((continent, i) => (
                       <span key={`continent${i}`}>{continent}</span>
                     ))}
                   </div>
-                  <div class="b1">Población</div>
-                  <div class="b2">{country.population}</div>
-                  <div class="c1">Idiomas</div>
-                  <div class="c2">
+                  <div className="b1">Población</div>
+                  <div className="b2">{country.population}</div>
+                  <div className="c1">Idiomas</div>
+                  <div className="c2">
                     {Object.values(country.languages).join(", ")}
                   </div>
-                  <div class="d1">Monedas</div>
-                  <div class="d2">
+                  <div className="d1">Monedas</div>
+                  <div className="d2">
                     {Object.values(country.currencies).map((currency, i) => (
                       <span key={`currency${i}`}>
                         {i === 0 ? `${currency.name}` : `, ${currency.name}`}
                       </span>
                     ))}
                   </div>
-                  <div class="e1">Area</div>
-                  <div class="e2">{country.area} km2</div>
-                  <div class="f1">Lado de la conducción</div>
-                  <div class="f2">{country.car.side}</div>
+                  <div className="e1">Area</div>
+                  <div className="e2">{country.area} km2</div>
+                  <div className="f1">Lado de la conducción</div>
+                  <div className="f2">{country.car.side}</div>
                 </div>
               </div>
               <div className="section-half">
