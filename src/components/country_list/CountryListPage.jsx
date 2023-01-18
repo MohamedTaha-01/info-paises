@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import CountryItem from "./CountryItem";
-import { useMediaQuery } from "react-responsive";
+import { useContext } from "react";
+import { ScreenSizeContext } from "../../App";
 
 export default function CountryListPage({ dataChunk }) {
-  const isSmallScreen = useMediaQuery({ maxWidth: 720 });
+  const isSmallScreen = useContext(ScreenSizeContext);
 
   return (
     <>
@@ -20,17 +21,11 @@ export default function CountryListPage({ dataChunk }) {
       </div>
       {dataChunk.map((country, i) =>
         !isSmallScreen ? (
-          <Link
-            to={`/countries/${country.name.common}`}
-            key={`country${i}`}
-            className="page-item"
-          >
-            <CountryItem country={country} isSmallScreen={isSmallScreen} />
+          <Link to={`/countries/${country.name.common}`} key={`country${i}`}>
+            <CountryItem country={country} />
           </Link>
         ) : (
-          <div key={`country${i}`} className="page-item">
-            <CountryItem country={country} isSmallScreen={isSmallScreen} />
-          </div>
+          <CountryItem key={`country${i}`} country={country} />
         )
       )}
     </>

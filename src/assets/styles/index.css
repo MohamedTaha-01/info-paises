@@ -110,11 +110,6 @@ code {
   justify-content: space-between;
 }
 
-.page-item {
-  position: relative;
-  display: block;
-  width: 100%;
-}
 .item {
   display: grid;
   grid-template-columns: 0.8fr 1fr 0.5fr 0.5fr 1fr;
@@ -168,7 +163,6 @@ code {
   grid-area: item-languages;
 }
 .item .data-grid-mobile {
-  display: none;
   height: 0;
   opacity: 0;
   transition: all 600ms ease-in-out;

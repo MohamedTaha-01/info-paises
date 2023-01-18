@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useReducer } from "react";
 import { useSearchParams } from "react-router-dom";
-import CountryList from "../components/country_list/CountryList";
+import CountryListWrapper from "../components/country_list/CountryListWrapper";
 import FiltersForm from "../components/filters_form/FiltersForm";
 import { continentsArray } from "../utils/continentsArray";
 
@@ -99,7 +99,7 @@ export default function Countries() {
         {dataLoading ? (
           <p>Cargando datos...</p>
         ) : (
-          <CountryList
+          <CountryListWrapper
             data={data}
             searchValue={searchValue}
             continentsChecked={continentsChecked}

@@ -6,7 +6,7 @@ import {
   calcItemsTo_Number,
 } from "../../utils/calcItemsNumber";
 
-export default function CountryList({
+export default function CountryListWrapper({
   data,
   searchValue,
   continentsChecked,
