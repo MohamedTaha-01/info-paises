@@ -31,7 +31,9 @@ export default function Country() {
           <div key={i} className="country-container">
             <h2>
               {country.name.common}&nbsp;
-              <span style={{ fontSize: 18 }}>({country.capital})</span>
+              {country.capital && (
+                <span style={{ fontSize: 18 }}>({country.capital})</span>
+              )}
             </h2>
             <hr />
             <div className="section-1">
