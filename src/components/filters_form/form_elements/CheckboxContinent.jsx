@@ -1,4 +1,3 @@
-import { IDLE_FETCHER } from "@remix-run/router";
 import { useEffect } from "react";
 
 export default function CheckboxContinent({
