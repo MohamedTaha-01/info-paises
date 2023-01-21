@@ -48,13 +48,10 @@ export default function Country() {
                       <span key={`continent${i}`}>{continent}</span>
                     ))}
                   </div>
-                  <div className="b1">Población</div>
-                  <div className="b2">{country.population}</div>
-                  <div className="c1">Idiomas</div>
-                  <div className="c2">
-                    {country.languages &&
-                      Object.values(country.languages).join(", ")}
-                  </div>
+                  <div className="b1">Área</div>
+                  <div className="b2">{country.area} km2</div>
+                  <div className="c1">Población</div>
+                  <div className="c2">{country.population}</div>
                   <div className="d1">Monedas</div>
                   <div className="d2">
                     {country.currencies &&
@@ -64,8 +61,11 @@ export default function Country() {
                         </span>
                       ))}
                   </div>
-                  <div className="e1">Area</div>
-                  <div className="e2">{country.area} km2</div>
+                  <div className="e1">Idiomas</div>
+                  <div className="e2">
+                    {country.languages &&
+                      Object.values(country.languages).join(", ")}
+                  </div>
                   <div className="f1">Lado de la conducción</div>
                   <div className="f2">{country.car.side}</div>
                 </div>
