@@ -159,4 +159,24 @@
       }
     }
   }
+
+  .section-3 {
+    width: auto;
+    height: auto;
+    text-align: center;
+    padding-bottom: 2rem;
+
+    button {
+      background-color: v.$blue-primary;
+      color: v.$light;
+      border: none;
+      padding: 16px 64px 16px 64px;
+      border-radius: 20px;
+      font-weight: bold;
+
+      &:hover {
+        background-color: v.$blue-alternative;
+      }
+    }
+  }
 }

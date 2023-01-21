@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const axios = require("axios").default;
 
@@ -7,6 +7,7 @@ export default function Country() {
   const [dataLoading, setDataLoading] = useState(false);
   const [data, setData] = useState();
   const params = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setDataLoading(true);
@@ -75,6 +76,9 @@ export default function Country() {
                   <img src={country.coatOfArms.svg} alt="" />
                 </div>
               )}
+            </div>
+            <div className="section-3">
+              <button onClick={() => navigate(-1)}>Volver</button>
             </div>
           </div>
         ))

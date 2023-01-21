@@ -369,6 +369,23 @@ nav ul a:hover, nav ul a.active {
   grid-area: f2;
   text-transform: capitalize;
 }
+.country-container .section-3 {
+  width: auto;
+  height: auto;
+  text-align: center;
+  padding-bottom: 2rem;
+}
+.country-container .section-3 button {
+  background-color: #002752;
+  color: #e3e3e3;
+  border: none;
+  padding: 16px 64px 16px 64px;
+  border-radius: 20px;
+  font-weight: bold;
+}
+.country-container .section-3 button:hover {
+  background-color: #485696;
+}
 
 .filter-wrapper {
   width: 100%;
