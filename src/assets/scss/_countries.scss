@@ -1,5 +1,13 @@
 @use "_variables" as v;
 
+.info-wrapper {
+  width: 70%;
+  margin: 50px auto 60px auto;
+  ul {
+    list-style: none;
+  }
+}
+
 .page_options-wrapper {
   width: 100%;
   display: flex;
