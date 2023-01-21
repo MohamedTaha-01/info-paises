@@ -14,6 +14,7 @@ export default function Countries() {
   const [searchValue, setSearch] = useState("");
   const [continentsChecked, setContinentsChecked] = useState(continentsArray);
 
+  // Radio inputs filter (is/not independent)
   const radioIndependentReducer = (state, action) => {
     switch (action.type) {
       default:
@@ -46,6 +47,7 @@ export default function Countries() {
     }
   );
 
+  // fetch data
   useEffect(() => {
     setDataLoading(true);
     const fetchData = async () => {
@@ -103,7 +105,7 @@ export default function Countries() {
         {dataLoading ? (
           <p>Cargando datos...</p>
         ) : dataError ? (
-          <p>Error</p>
+          <p>Error, no se han podido cargar los datos.</p>
         ) : (
           <CountryListWrapper
             data={data}

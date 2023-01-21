@@ -9,6 +9,7 @@ export default function Country() {
   const params = useParams();
   const navigate = useNavigate();
 
+  // fetch data
   useEffect(() => {
     setDataLoading(true);
     const fetchData = async () => {

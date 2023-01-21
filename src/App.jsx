@@ -11,6 +11,7 @@ export const ScreenSizeContext = createContext(false);
 function App() {
   return (
     <div className="App">
+      {/* screen size context */}
       <ScreenSizeContext.Provider value={useMediaQuery({ maxWidth: 720 })}>
         <Nav />
         <Routes>

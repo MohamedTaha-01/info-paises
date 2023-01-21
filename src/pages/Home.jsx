@@ -7,6 +7,7 @@ export default function Home() {
   const [data, setData] = useState([]);
   const [countryName, setCountryName] = useState("");
 
+  // fetch country names
   useEffect(() => {
     const fetchData = async () => {
       const res = await axios.get(
@@ -17,6 +18,7 @@ export default function Home() {
     fetchData();
   }, []);
 
+  // choose random country name
   useEffect(() => {
     const random = Math.floor(Math.random() * data.length);
     if (data.length > 1) setCountryName(data[random].name.common);
