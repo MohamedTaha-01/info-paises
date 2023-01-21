@@ -10,8 +10,6 @@
 
 ## Descripción
 
-**Proyecto aún en desarrollo.**
-
 <!-- captura y link a web -->
 https://mohamedtaha-01.github.io/info-paises/#/
 
