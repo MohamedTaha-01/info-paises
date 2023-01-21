@@ -30,12 +30,12 @@ Creo este proyecto para profundizar más en react y aprender a usar más hooks. 
 
 ## Funciones y características
 
-- Hooks usados: UseState, UseEffect, useReducer, useRef y UseContext.
+- Hooks usados: UseState, UseEffect, useReducer, ~~useRef~~ (eliminado) y UseContext.
 - Peticiones fetch a API pública externa mediante el cliente http Axios.
 - Posibilidad de filtrar, ordenar y buscar resultados.
 - Paginación dinámica. Incluye opción para seleccionar número de resultados a mostrar por página.
 - Navegación con navbar y enlaces mediante react-router-dom.
-- Diseño responsive complementado con el paquete react-responsive.
+- Diseño responsive mediante CSS media querys y el paquete react-responsive.
 
 ## Contacto
 
