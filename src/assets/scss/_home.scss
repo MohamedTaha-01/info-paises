@@ -1,0 +1,48 @@
+@use "_variables" as v;
+
+.home-wrapper {
+  height: calc(100vh);
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  overflow: hidden;
+
+  @media (max-width: 720px) {
+    overflow-y: auto;
+  }
+
+  .home-left,
+  .home-right {
+    height: 100%;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    color: v.$light;
+    background-color: transparent;
+    transition: all ease-in-out 0.4s;
+
+    & > * {
+      padding: 16px;
+    }
+
+    svg {
+      fill: v.$light;
+    }
+
+    &:hover {
+      background-color: v.$blue-alternative;
+      transform: scale(110%);
+    }
+
+    @media (max-width: 720px) {
+      width: 100%;
+    }
+  }
+}
