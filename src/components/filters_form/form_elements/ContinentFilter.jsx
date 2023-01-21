@@ -54,7 +54,7 @@ export default function ContinentFilter({
         checked={continentsChecked[i].checked}
       />
       <label htmlFor={`checkbox-continent-${continent.name}`}>
-        {continent.name}
+        &nbsp;{continent.name}
       </label>
     </>
   );

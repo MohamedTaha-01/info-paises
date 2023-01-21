@@ -16,7 +16,7 @@ export default function IndependentFilter({
           dispatchRadioIndependent(actionType);
         }}
       />
-      <label htmlFor={`radio-independent-${option}`}>{value}</label>
+      <label htmlFor={`radio-independent-${option}`}>&nbsp;{value}</label>
     </>
   );
 }

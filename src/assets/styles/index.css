@@ -41,8 +41,9 @@ fieldset {
   border: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+button,
+label {
+  cursor: pointer;
 }
 
 /*===============================================================*/
