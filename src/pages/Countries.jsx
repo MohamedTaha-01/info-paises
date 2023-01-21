@@ -8,6 +8,7 @@ const axios = require("axios").default;
 export default function Countries() {
   // fetch data
   const [dataLoading, setDataLoading] = useState(false);
+  const [dataError, setDataError] = useState(false);
   const [data, setData] = useState();
   // filters
   const [searchValue, setSearch] = useState("");
@@ -48,11 +49,16 @@ export default function Countries() {
   useEffect(() => {
     setDataLoading(true);
     const fetchData = async () => {
-      const res = await axios.get(
-        "https://restcountries.com/v3.1/all?fields=name,cca2,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags,independent"
-      );
-      setDataLoading(false);
-      setData(res.data);
+      try {
+        const res = await axios.get(
+          "https://restcountries.com/v3.1/all?fields=name,cca2,currencies,capital,region,subregion,languages,flag,maps,population,continents,flags,independent"
+        );
+        setDataLoading(false);
+        setData(res.data);
+      } catch (error) {
+        setDataLoading(false);
+        setDataError(true);
+      }
     };
     fetchData();
   }, []);
@@ -96,6 +102,8 @@ export default function Countries() {
       <div className="country_list-wrapper">
         {dataLoading ? (
           <p>Cargando datos...</p>
+        ) : dataError ? (
+          <p>Error</p>
         ) : (
           <CountryListWrapper
             data={data}
