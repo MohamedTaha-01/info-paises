@@ -1,7 +1,19 @@
-import { Link, NavLink } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 export default function Nav() {
-  return (
+  let { pathname } = useLocation();
+  const [showNavbar, setShowNavbar] = useState(true);
+
+  console.log(pathname);
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setShowNavbar(false);
+    } else setShowNavbar(true);
+  }, [pathname]);
+
+  return showNavbar ? (
     <nav>
       <h1>
         <Link to="/">Info países</Link>
@@ -19,5 +31,5 @@ export default function Nav() {
         </li>
       </ul>
     </nav>
-  );
+  ) : null;
 }
