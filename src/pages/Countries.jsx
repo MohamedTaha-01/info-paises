@@ -75,15 +75,19 @@ export default function Countries() {
           </li>
           <br />
           <li>
-            Haciendo click en un territorio podrás ver información sobre el.
+            Haciendo click en un territorio podrás ver información sobre el
+            mismo.
           </li>
-          <br />
-          <li>Utiliza los filtros para encontrar el territorio que deseas.</li>
           <br />
           <li>
             No todos los territorios se consideran países, algunos son
             territorios independientes.
           </li>
+          <br />
+          <li>
+            Puedes utilizar los filtros para encontrar el territorio que deseas.
+          </li>
+
           <br />
           <li>
             También puedes ordenar los territorios o cambiar el número de

@@ -5,8 +5,6 @@ export default function Nav() {
   let { pathname } = useLocation();
   const [showNavbar, setShowNavbar] = useState(true);
 
-  console.log(pathname);
-
   useEffect(() => {
     if (pathname === "/") {
       setShowNavbar(false);
@@ -20,12 +18,12 @@ export default function Nav() {
       </h1>
       <ul>
         <li>
-          <NavLink end to="/">
+          <NavLink end to="/" className="navlink">
             <h3>Inicio</h3>
           </NavLink>
         </li>
         <li>
-          <NavLink to="/countries">
+          <NavLink to="/countries" className="navlink">
             <h3>Países y territorios</h3>
           </NavLink>
         </li>

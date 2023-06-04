@@ -1,38 +1,14 @@
 @use "_variables" as v;
 
 nav {
-  background-image: linear-gradient(
-    45deg,
-    hsl(211deg 100% 16%) 0%,
-    hsl(212deg 98% 17%) 13%,
-    hsl(213deg 94% 19%) 19%,
-    hsl(214deg 90% 20%) 24%,
-    hsl(215deg 87% 21%) 28%,
-    hsl(216deg 84% 23%) 32%,
-    hsl(217deg 82% 24%) 35%,
-    hsl(217deg 78% 25%) 39%,
-    hsl(218deg 75% 27%) 42%,
-    hsl(219deg 72% 28%) 45%,
-    hsl(220deg 69% 29%) 48%,
-    hsl(221deg 66% 30%) 52%,
-    hsl(222deg 63% 32%) 55%,
-    hsl(223deg 60% 33%) 58%,
-    hsl(223deg 57% 34%) 61%,
-    hsl(224deg 54% 36%) 65%,
-    hsl(225deg 50% 37%) 68%,
-    hsl(226deg 48% 38%) 72%,
-    hsl(227deg 45% 40%) 76%,
-    hsl(227deg 41% 41%) 81%,
-    hsl(229deg 38% 42%) 87%,
-    hsl(229deg 35% 44%) 100%
-  );
+  background-color: v.$blue-secondary;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   overflow: hidden;
-  box-shadow: 0px 0px 2px 0px v.$dark;
+  box-shadow: 0px 0px 2px 1px v.$dark;
   padding: 20px;
   text-align: center;
 
@@ -45,16 +21,20 @@ nav {
     padding: 20px;
   }
 
-  a,
-  a:hover {
+  a {
+    color: v.$light;
+  }
+
+  a.navlink,
+  a.navlink:hover {
     color: v.$light;
     opacity: unset;
   }
 
-  ul a {
+  ul a.navlink {
     &:hover,
     &.active {
-      color: v.$yellow-secondary;
+      color: v.$light-active;
       opacity: unset;
     }
   }

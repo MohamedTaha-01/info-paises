@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import CountryListButton from "./CountryListButton";
-import CountryListPage from "./CountryListPage";
 import {
   calcItemsFrom_Number,
   calcItemsTo_Number,
 } from "../../utils/calcItemsNumber";
+import CountryItem from "./CountryItem";
+import { ScreenSizeContext } from "../../App";
+import { Link } from "react-router-dom";
 
 export default function CountryListWrapper({
   data,
@@ -15,6 +17,8 @@ export default function CountryListWrapper({
   const [currentPage, setCurrentPage] = useState(0);
   const [pageSize, setPageSize] = useState(10);
   const [sorting, setSorting] = useState("by_nameAsc");
+
+  const isSmallScreen = useContext(ScreenSizeContext);
 
   useEffect(() => {
     setCurrentPage(0);
@@ -162,7 +166,6 @@ export default function CountryListWrapper({
               >
                 50
               </button>
-              <p>{`Mostrando ${pageSize} resultados por página`}</p>
             </div>
           </div>
           <div className="page_options-number_page">
@@ -184,21 +187,54 @@ export default function CountryListWrapper({
       {data &&
         slicedData.map((dataChunk, sliceIndex) =>
           sliceIndex === currentPage ? (
-            <div key={`CountryListPage${sliceIndex}`} className="page-data">
-              <div className="page-item-number">
-                <p>{`Resultados del ${calcItemsFrom_Number(
+            // ----------------------- START DATA -----------------------
+            <div key={`CountryListPage${sliceIndex}`} className="data-wrapper">
+              <div className="data-item-number">
+                <p>{`Mostrando resultados del ${calcItemsFrom_Number(
                   slicedData,
                   currentPage
                 )} al ${calcItemsTo_Number(
                   slicedData,
                   currentPage
                 )} de un total de ${filteredData.length} resultados`}</p>
+                <br />
               </div>
-              <div className="page-item-wrapper">
-                <CountryListPage dataChunk={dataChunk} />
-              </div>
+
+              {!isSmallScreen ? (
+                /* DESKTOP */
+                <>
+                  {/* START HEADER */}
+                  <div className="data-grid">
+                    <div className="c0 grid-header"></div>
+                    <div className="c1 grid-header">País</div>
+                    <div className="c2 grid-header">Capital</div>
+                    <div className="c3 grid-header">Continentes</div>
+                    <div className="c4 grid-header">Población</div>
+                    <div className="c5 grid-header">Idiomas</div>
+                  </div>
+                  {/* END HEADER */}
+                  {/* START COUNTRIES LIST */}
+                  {dataChunk.map((country, i) => (
+                    <CountryItem country={country} key={`country${i}`} />
+                  ))}
+                  {/* END COUNTRIES LIST */}
+                </>
+              ) : (
+                /* MOBILE */
+                dataChunk.map((country, i) => (
+                  <Link
+                    className="data-gridm"
+                    to={`/countries/${country.name.common}`}
+                    key={`country${i}`}
+                  >
+                    <div className="c1m">{country.flag}</div>
+                    <div className="c2m">{country.name.common}</div>
+                  </Link>
+                ))
+              )}
             </div>
           ) : (
+            // ----------------------- END DATA -----------------------
             ""
           )
         )}

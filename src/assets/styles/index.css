@@ -70,14 +70,14 @@ label {
 }
 
 nav {
-  background-image: linear-gradient(45deg, hsl(211deg, 100%, 16%) 0%, hsl(212deg, 98%, 17%) 13%, hsl(213deg, 94%, 19%) 19%, hsl(214deg, 90%, 20%) 24%, hsl(215deg, 87%, 21%) 28%, hsl(216deg, 84%, 23%) 32%, hsl(217deg, 82%, 24%) 35%, hsl(217deg, 78%, 25%) 39%, hsl(218deg, 75%, 27%) 42%, hsl(219deg, 72%, 28%) 45%, hsl(220deg, 69%, 29%) 48%, hsl(221deg, 66%, 30%) 52%, hsl(222deg, 63%, 32%) 55%, hsl(223deg, 60%, 33%) 58%, hsl(223deg, 57%, 34%) 61%, hsl(224deg, 54%, 36%) 65%, hsl(225deg, 50%, 37%) 68%, hsl(226deg, 48%, 38%) 72%, hsl(227deg, 45%, 40%) 76%, hsl(227deg, 41%, 41%) 81%, hsl(229deg, 38%, 42%) 87%, hsl(229deg, 35%, 44%) 100%);
+  background-color: rgb(4, 20, 38);
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
   overflow: hidden;
-  box-shadow: 0px 0px 2px 0px #000814;
+  box-shadow: 0px 0px 2px 1px #000814;
   padding: 20px;
   text-align: center;
 }
@@ -88,13 +88,16 @@ nav li {
   display: inline-block;
   padding: 20px;
 }
-nav a,
-nav a:hover {
+nav a {
+  color: #e3e3e3;
+}
+nav a.navlink,
+nav a.navlink:hover {
   color: #e3e3e3;
   opacity: unset;
 }
-nav ul a:hover, nav ul a.active {
-  color: #ffc300;
+nav ul a.navlink:hover, nav ul a.navlink.active {
+  color: rgba(227, 227, 227, 0.75);
   opacity: unset;
 }
 
@@ -155,8 +158,13 @@ nav ul a:hover, nav ul a.active {
   list-style: none;
 }
 
+.country_list-wrapper {
+  padding: 32px 0px;
+}
+
 .page_options-wrapper {
-  width: 100%;
+  width: 70%;
+  margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -191,60 +199,84 @@ nav ul a:hover, nav ul a.active {
   justify-content: space-between;
 }
 
-.country-item {
+.data-wrapper {
+  width: 70%;
+  margin: auto;
+}
+.data-wrapper a {
+  color: #e3e3e3;
+}
+.data-wrapper a:hover {
+  background-color: #e3e3e3;
+  color: rgb(4, 20, 38);
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.data-wrapper .grid-header {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.data-grid {
   display: grid;
-  grid-template-columns: 0.8fr 1fr 0.5fr 0.5fr 1fr;
-  grid-auto-rows: minmax(150px, auto);
+  grid-template-columns: 0.2fr 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(auto-fill, 1fr);
   gap: 0px 0px;
   grid-auto-flow: row;
-  grid-template-areas: "item-name item-capital item-continents item-population item-languages";
-  background-image: linear-gradient(45deg, hsl(211deg, 100%, 16%) 0%, hsl(212deg, 98%, 17%) 13%, hsl(213deg, 94%, 19%) 19%, hsl(214deg, 90%, 20%) 24%, hsl(215deg, 87%, 21%) 28%, hsl(216deg, 84%, 23%) 32%, hsl(217deg, 82%, 24%) 35%, hsl(217deg, 78%, 25%) 39%, hsl(218deg, 75%, 27%) 42%, hsl(219deg, 72%, 28%) 45%, hsl(220deg, 69%, 29%) 48%, hsl(221deg, 66%, 30%) 52%, hsl(222deg, 63%, 32%) 55%, hsl(223deg, 60%, 33%) 58%, hsl(223deg, 57%, 34%) 61%, hsl(224deg, 54%, 36%) 65%, hsl(225deg, 50%, 37%) 68%, hsl(226deg, 48%, 38%) 72%, hsl(227deg, 45%, 40%) 76%, hsl(227deg, 41%, 41%) 81%, hsl(229deg, 38%, 42%) 87%, hsl(229deg, 35%, 44%) 100%);
-  border: 1px solid #171717;
-  color: #e3e3e3;
-  text-align: center;
-  font-size: 24px;
+  grid-template-areas: "c0 c1 c2 c3 c4 c5";
+  border-top: 1px solid rgba(227, 227, 227, 0.75);
 }
-@media (max-width: 720px) {
-  .country-item {
-    display: block;
-  }
+
+.c0,
+.c1,
+.c2,
+.c3,
+.c4,
+.c5 {
+  padding: 32px 16px;
 }
-.country-item .item-name {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-  background-position: left;
-  font-weight: bold;
-  letter-spacing: 2px;
-  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.9);
+
+.c0 {
+  grid-area: c0;
 }
-@media (max-width: 720px) {
-  .country-item .item-name {
-    height: 150px;
-  }
+
+.c1 {
+  grid-area: c1;
 }
-.country-item div {
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  flex-direction: column;
+
+.c2 {
+  grid-area: c2;
 }
-.country-item .item-name {
-  grid-area: item-name;
+
+.c3 {
+  grid-area: c3;
 }
-.country-item .item-capital {
-  grid-area: item-capital;
+
+.c4 {
+  grid-area: c4;
 }
-.country-item .item-continents {
-  grid-area: item-continents;
+
+.c5 {
+  grid-area: c5;
 }
-.country-item .item-population {
-  grid-area: item-population;
+
+.data-gridm {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: repeat(auto-fill, 1fr);
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas: "c1m c2m";
+  border-top: 1px solid rgba(227, 227, 227, 0.75);
 }
-.country-item .item-languages {
-  grid-area: item-languages;
+
+.c1m {
+  grid-area: c1m;
+  padding: 16px;
+}
+
+.c2m {
+  grid-area: c2m;
+  padding: 16px;
 }
 
 .country-container {
